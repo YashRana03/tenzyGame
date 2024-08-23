@@ -7,6 +7,10 @@ body {
   background-color: #1e2324;
 }
 
+/* -----------------------------------------------------------------------------------------------------------------------------
+CANVAS
+----------------------------------------------------------------------------------------------------------------------------- */
+
 .container {
   position: absolute;
   top: calc(50% - 250px);
@@ -29,6 +33,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  display: flex;
 }
 
 .canvas::after,
@@ -49,4 +54,41 @@ body {
 .canvas::before {
   filter: blur(1.5rem);
   opacity: 0.4;
+}
+
+/* -----------------------------------------------------------------------------------------------------------------------------
+END OF CANVAS
+----------------------------------------------------------------------------------------------------------------------------- */
+
+.grid-container {
+  width: 80%;
+  height: 200px;
+  align-self: flex-end;
+  margin: 0 auto;
+}
+
+.dice-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 30px 30px 30px 30px 30px;
+  column-gap: 15px;
+  row-gap: 10px;
+  justify-content: center;
+}
+
+.dice {
+  width: 35px;
+  height: 35px;
+  background-color: ghostwhite;
+  color: #190dff;
+  font-family: "New Amsterdam", sans-serif;
+  font-weight: 900;
+  font-size: 27px;
+  font-style: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px #273d15;
 }
