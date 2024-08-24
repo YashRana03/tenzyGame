@@ -3,8 +3,36 @@ import { useState, useEffect } from "react";
 import Dice from "./components/Dice";
 
 function App() {
-  let valuesArr = [1, 3, 5, 2, 6, 2, 1, 4, 4, 3]; // 10 random numbers from 1 to 6
+  const [diceValues, setDiceValues] = useState(tenRandomValues()); //10 random numbers from 1 to 6
   const [selected, setSelected] = useState(new Array(10).fill(false));
+
+  // Rolls the dice, making sure that selected dice do not change in value
+  function rollDice() {
+    setDiceValues((prevState) => {
+      // console.log(prevState, selected);
+      const newArr = [...prevState];
+      for (let i = 0; i < selected.length; i++) {
+        if (!selected[i]) {
+          newArr[i] = random();
+        }
+      }
+      return newArr;
+    });
+  }
+
+  // Returns random number in range 1-6
+  function random() {
+    return Math.floor(Math.random() * 6) + 1;
+  }
+
+  // returns 10 random numbers in the range 1-6
+  function tenRandomValues() {
+    const newArr = [];
+    for (let i = 0; i < 10; i++) {
+      newArr.push(random());
+    }
+    return newArr;
+  }
 
   // selects/unselects dice on click
   function toggleSelected(event) {
@@ -16,7 +44,7 @@ function App() {
   }
 
   // creating  array of dice elements to be rendered from random values
-  const elementsArr = valuesArr.map((val1, i) => {
+  const elementsArr = diceValues.map((val1, i) => {
     return (
       <Dice
         num={val1}
@@ -31,6 +59,9 @@ function App() {
     <>
       <div className="container">
         <div className="canvas">
+          <button className="roll-btn" onClick={rollDice}>
+            ROLL
+          </button>
           <div className="grid-container">
             <div className="dice-grid">{elementsArr}</div>
           </div>

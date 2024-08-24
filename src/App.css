@@ -92,3 +92,24 @@ END OF CANVAS
   cursor: pointer;
   box-shadow: 5px 5px 5px #273d15;
 }
+
+.roll-btn {
+  position: absolute;
+  top: 250px;
+  left: 190px;
+  width: 70px;
+  height: 35px;
+  border: none;
+  border-radius: 7px;
+  background-color: #4a0dff;
+  color: ghostwhite;
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s all;
+}
+
+.roll-btn:active {
+  transform: scale(0.95);
+}
