@@ -4,17 +4,11 @@ import Dice from "./components/Dice";
 
 function App() {
   // dice state (includes dice value and if dice is selected or not)
-  const [dice, setDice] = useState(
-    tenRandomValues().map((val) => {
-      return {
-        value: val,
-        selected: false,
-      };
-    })
-  );
+  const [dice, setDice] = useState(reinitialiseDice());
 
   // button state (enabled/disabled)
   const [btnDisabled, setBntDisabled] = useState(false);
+  const [gameOver, setGameOver] = useState(true);
 
   // Returns random number in range 1-6
   function random() {
@@ -27,6 +21,17 @@ function App() {
     for (let i = 0; i < 10; i++) {
       newArr.push(random());
     }
+    return newArr;
+  }
+
+  // generates object arrray made of random numbers for the state of dice
+  function reinitialiseDice() {
+    const newArr = tenRandomValues().map((val) => {
+      return {
+        value: val,
+        selected: false,
+      };
+    });
     return newArr;
   }
 
@@ -62,24 +67,39 @@ function App() {
     });
   }
 
-  // here currently selected dice are checked
-  // if  2 dice of different value are currenlty selected the roll button will be disabled
+  // restarts new game
+  function resetGame() {
+    setGameOver(false);
+    setDice(reinitialiseDice());
+  }
+
+  // here currently selected dice are checked to:
+  // 1) if  2 dice of different value are currenlty selected the roll button will be disabled
+  // 2) determine if game is over if all 10 are selected
   useEffect(() => {
     let prevSelectedVal = null;
+    let numSelected = 0;
     for (let i = 0; i < dice.length; i++) {
       if (dice[i].selected) {
+        numSelected += 1;
         if (prevSelectedVal == null) {
           prevSelectedVal = dice[i].value;
         } else {
           if (prevSelectedVal != dice[i].value) {
-            setBntDisabled(true); // disalbing button as at least 2 dice of different number are selected
+            if (!gameOver) {
+              setBntDisabled(true); // disalbing button as at least 2 dice of different number are selected
+            }
             return;
           }
         }
       }
     }
+    // here the numbers of selected dices is checked if 10 it means the game is over
+    if (numSelected == dice.length) {
+      setGameOver(true);
+    }
     setBntDisabled(false); // enabling the button
-  }, [dice]);
+  }, [dice, gameOver]);
 
   // creating array of dice elements from random values, to be rendered
   const elementsArr = dice.map((die, i) => {
@@ -98,18 +118,26 @@ function App() {
     <>
       <div className="container">
         <div className="canvas">
-          <button
-            disabled={btnDisabled}
-            className="roll-btn"
-            onClick={rollDice}
-            style={{
-              opacity: btnDisabled ? "0.7" : "",
-              transform: btnDisabled ? "none" : "",
-              cursor: btnDisabled ? "not-allowed" : "",
-            }}
-          >
-            ROLL
-          </button>
+          {gameOver ? (
+            <h3 className="gameOver-msg ">CONGRATS! YOU WON!!</h3>
+          ) : null}
+
+          <div className="btn-container">
+            <button
+              disabled={btnDisabled}
+              className="roll-btn"
+              onClick={gameOver ? resetGame : rollDice}
+              style={{
+                opacity: btnDisabled ? "0.7" : "",
+                transform: btnDisabled ? "none" : "",
+                cursor: btnDisabled ? "not-allowed" : "",
+                width: gameOver ? "100px" : "",
+              }}
+            >
+              {gameOver ? "Play Again" : "Roll"}
+            </button>
+          </div>
+
           <div className="grid-container">
             <div className="dice-grid">{elementsArr}</div>
           </div>
