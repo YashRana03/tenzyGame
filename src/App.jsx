@@ -3,22 +3,18 @@ import { useState, useEffect } from "react";
 import Dice from "./components/Dice";
 
 function App() {
-  const [diceValues, setDiceValues] = useState(tenRandomValues()); //10 random numbers from 1 to 6
-  const [selected, setSelected] = useState(new Array(10).fill(false));
+  // dice state (includes dice value and if dice is selected or not)
+  const [dice, setDice] = useState(
+    tenRandomValues().map((val) => {
+      return {
+        value: val,
+        selected: false,
+      };
+    })
+  );
 
-  // Rolls the dice, making sure that selected dice do not change in value
-  function rollDice() {
-    setDiceValues((prevState) => {
-      // console.log(prevState, selected);
-      const newArr = [...prevState];
-      for (let i = 0; i < selected.length; i++) {
-        if (!selected[i]) {
-          newArr[i] = random();
-        }
-      }
-      return newArr;
-    });
-  }
+  // button state (enabled/disabled)
+  const [btnDisabled, setBntDisabled] = useState(false);
 
   // Returns random number in range 1-6
   function random() {
@@ -36,30 +32,82 @@ function App() {
 
   // selects/unselects dice on click
   function toggleSelected(event) {
-    setSelected((prevState) => {
+    setDice((prevState) => {
+      const id = event.target.id; // getting id of clicked dice
       const newArr = [...prevState];
-      newArr[event.target.id] = !newArr[event.target.id];
-      return newArr;
+
+      // updating the dice object
+      newArr[id] = {
+        ...newArr[id],
+        selected: !newArr[id].selected,
+      };
+      return newArr; // returning the updated array of dice
     });
   }
 
-  // creating  array of dice elements to be rendered from random values
-  const elementsArr = diceValues.map((val1, i) => {
+  // Rolls the dice, making sure that selected dice do not change in value
+  function rollDice() {
+    setDice((prevState) => {
+      const newArr = [...prevState]; // copy of previous state
+      for (let i = 0; i < prevState.length; i++) {
+        // if the dice is not selected a new value will be randomly assigned
+        if (!prevState[i].selected) {
+          newArr[i] = {
+            ...prevState[i],
+            value: random(),
+          };
+        }
+      }
+      return newArr; // returning updated state
+    });
+  }
+
+  // here currently selected dice are checked
+  // if  2 dice of different value are currenlty selected the roll button will be disabled
+  useEffect(() => {
+    let prevSelectedVal = null;
+    for (let i = 0; i < dice.length; i++) {
+      if (dice[i].selected) {
+        if (prevSelectedVal == null) {
+          prevSelectedVal = dice[i].value;
+        } else {
+          if (prevSelectedVal != dice[i].value) {
+            setBntDisabled(true); // disalbing button as at least 2 dice of different number are selected
+            return;
+          }
+        }
+      }
+    }
+    setBntDisabled(false); // enabling the button
+  }, [dice]);
+
+  // creating array of dice elements from random values, to be rendered
+  const elementsArr = dice.map((die, i) => {
     return (
       <Dice
-        num={val1}
+        num={die.value}
         key={i}
         id={i}
         handleClick={toggleSelected}
-        selected={selected[i]}
+        selected={die.selected}
       />
     );
   });
+
   return (
     <>
       <div className="container">
         <div className="canvas">
-          <button className="roll-btn" onClick={rollDice}>
+          <button
+            disabled={btnDisabled}
+            className="roll-btn"
+            onClick={rollDice}
+            style={{
+              opacity: btnDisabled ? "0.7" : "",
+              transform: btnDisabled ? "none" : "",
+              cursor: btnDisabled ? "not-allowed" : "",
+            }}
+          >
             ROLL
           </button>
           <div className="grid-container">
