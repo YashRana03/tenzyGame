@@ -11,6 +11,7 @@ export default function Dice(props) {
         id={props.id}
         onClick={props.handleClick}
         style={styles}
+        disabled={props.disableDice ? true : false}
       >
         {props.num}
       </div>

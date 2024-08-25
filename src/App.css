@@ -34,6 +34,8 @@ CANVAS
   background-size: cover;
   position: relative;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .canvas::after,
@@ -55,10 +57,6 @@ CANVAS
   filter: blur(1.5rem);
   opacity: 0.4;
 }
-
-/* -----------------------------------------------------------------------------------------------------------------------------
-END OF CANVAS
------------------------------------------------------------------------------------------------------------------------------ */
 
 /* -----------------------------------------------------------------------------------------------------------------------------
   DICE GRID
@@ -98,13 +96,19 @@ END OF CANVAS
   box-shadow: 5px 5px 5px #273d15;
 }
 
+/* disables div elements with disabled tag */
+div[disabled] {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 /* -----------------------------------------------------------------------------------------------------------------------------
-END OF DICE GRID
+ROLL/PLAY AGAIN BUTTON
 ----------------------------------------------------------------------------------------------------------------------------- */
 
 .btn-container {
   position: absolute;
-  top: 250px;
+  top: 232.5px;
   left: 170px;
   width: 110px;
   height: 35px;
@@ -114,6 +118,7 @@ END OF DICE GRID
 
 .roll-btn {
   width: 70px;
+  height: 35px;
   border: none;
   border-radius: 7px;
   background-color: #4a0dff;
@@ -131,9 +136,65 @@ END OF DICE GRID
 
 .gameOver-msg {
   position: absolute;
-  top: 30px;
+  top: -70px;
   left: 30px;
   font-family: "Honk", system-ui;
   font-optical-sizing: auto;
-  font-size: 45px;
+  font-size: 40px;
+}
+
+/* -----------------------------------------------------------------------------------------------------------------------------
+PAWNS
+----------------------------------------------------------------------------------------------------------------------------- */
+
+.pawn {
+  position: absolute;
+  scale: 2.5;
+  right: 55px;
+}
+
+.pawn-white {
+  color: white;
+  top: 90px;
+}
+
+.pawn-black {
+  color: black;
+  bottom: 90px;
+}
+
+.turn-pawn {
+  position: absolute;
+  scale: 2;
+  left: 20px;
+  top: 20px;
+}
+
+/* -----------------------------------------------------------------------------------------------------------------------------
+SCORE BOXES
+----------------------------------------------------------------------------------------------------------------------------- */
+
+.score-box {
+  position: absolute;
+  top: 232px;
+  width: 28px;
+  height: 28px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-family: "New Amsterdam";
+}
+
+.score-white {
+  left: 120px;
+  border: 3px solid white;
+  color: white;
+}
+
+.score-black {
+  left: 302px;
+  border: 3px solid black;
+  color: black;
 }
