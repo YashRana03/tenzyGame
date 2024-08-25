@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Player from "./components/Player";
+import { random, reinitialiseDice } from "./components/utility";
 
 function App() {
   // dice state (includes dice value and if dice is selected or not)
@@ -12,31 +13,6 @@ function App() {
 
   const [btnDisabled, setBntDisabled] = useState(false); // button state (enabled/disabled)
   const [gameOver, setGameOver] = useState(false); // used to to tell if game has ended
-
-  // Returns random number in range 1-6
-  function random() {
-    return Math.floor(Math.random() * 6) + 1;
-  }
-
-  // returns 10 random numbers in the range 1-6
-  function tenRandomValues() {
-    const newArr = [];
-    for (let i = 0; i < 10; i++) {
-      newArr.push(random());
-    }
-    return newArr;
-  }
-
-  // generates object arrray made of random numbers for the state of dice
-  function reinitialiseDice() {
-    const newArr = tenRandomValues().map((val) => {
-      return {
-        value: val,
-        selected: false,
-      };
-    });
-    return newArr;
-  }
 
   // Rolls the dice, making sure that selected dice do not change in value
   function rollDice(setDicePlr) {
