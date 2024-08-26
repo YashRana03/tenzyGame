@@ -59,6 +59,67 @@ CANVAS
 }
 
 /* -----------------------------------------------------------------------------------------------------------------------------
+  MESSAGES
+----------------------------------------------------------------------------------------------------------------------------- */
+
+.gameOver-msg {
+  position: absolute;
+  top: -70px;
+  left: 30px;
+  font-family: "Honk", system-ui;
+  font-optical-sizing: auto;
+  font-size: 40px;
+  transition: transform 1.5s ease-out;
+  transform: translateY(-500px);
+}
+
+.question-mark {
+  background-image: url("/images/question.svg");
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  fill: black;
+  stroke: black;
+  cursor: pointer;
+}
+
+.question-mark:hover {
+  transform: scale(0.95);
+}
+
+.info-msg {
+  width: 260px;
+  height: 70px;
+  position: absolute;
+  right: -40px;
+  top: 50px;
+  padding: 20px;
+  background-color: ghostwhite;
+  border-radius: 20px;
+  border: 2px solid black;
+  font-family: "Open Sans", sans-serif;
+  z-index: 2;
+  font-weight: 400;
+  color: #444444;
+}
+
+.info-msg p {
+  width: 240px;
+  text-align: center;
+}
+
+.cross {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  transform: scale(0.8);
+  cursor: pointer;
+}
+
+/* -----------------------------------------------------------------------------------------------------------------------------
   DICE GRID
 ----------------------------------------------------------------------------------------------------------------------------- */
 
@@ -132,17 +193,6 @@ ROLL/PLAY AGAIN BUTTON
 
 .roll-btn:active {
   transform: scale(0.95);
-}
-
-.gameOver-msg {
-  position: absolute;
-  top: -70px;
-  left: 30px;
-  font-family: "Honk", system-ui;
-  font-optical-sizing: auto;
-  font-size: 40px;
-  transition: transform 1.5s ease-out;
-  transform: translateY(-500px);
 }
 
 /* -----------------------------------------------------------------------------------------------------------------------------

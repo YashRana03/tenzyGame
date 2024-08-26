@@ -14,6 +14,8 @@ function App() {
   const [btnDisabled, setBntDisabled] = useState(false); // button state (enabled/disabled)
   const [gameOver, setGameOver] = useState(false); // used to to tell if game has ended
 
+  const [msgOpen, setMsgOpen] = useState(false);
+
   const diceSound = new Audio("/sounds/diceRollSound.mp3");
   const cheeringSound = new Audio("/sounds/cheeringSound.mp3");
 
@@ -87,6 +89,10 @@ function App() {
     setBntDisabled(false); // enabling the button
   }, [dicePlr1, dicePlr2]);
 
+  function toggleMsg() {
+    setMsgOpen((prevState) => !prevState);
+  }
+
   return (
     <>
       <div className="container">
@@ -99,6 +105,23 @@ function App() {
           >
             CONGRATS, {turn == 1 ? "WHITE" : "BLACK"} WON!!
           </h3>
+
+          <div className="question-mark" onClick={toggleMsg}></div>
+          {msgOpen ? (
+            <div className="info-msg">
+              <img
+                src="images/cross.svg"
+                className="cross"
+                onClick={toggleMsg}
+              />
+              <p>
+                To win simply roll the dice until all are of the same value.
+                Hold a dice value by clicking it.
+              </p>
+            </div>
+          ) : (
+            ""
+          )}
 
           <div className="btn-container">
             <button
