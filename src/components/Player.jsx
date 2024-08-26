@@ -2,8 +2,11 @@
 import Dice from "./Dice";
 
 export default function Player(props) {
+  const selectSound = new Audio("/sounds/selectsound.mp3");
+
   // selects/unselects dice on click
   function toggleSelected(event) {
+    selectSound.play();
     props.setDice((prevState) => {
       const id = event.target.id; // getting id of clicked dice
       const newArr = [...prevState];

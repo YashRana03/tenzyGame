@@ -29,7 +29,7 @@ CANVAS
   width: 100%;
   height: 100%;
   border-radius: 5px;
-  background-image: url("./assets/green-backgroud.jpg");
+  background-image: url("/images/green-backgroud.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -141,6 +141,8 @@ ROLL/PLAY AGAIN BUTTON
   font-family: "Honk", system-ui;
   font-optical-sizing: auto;
   font-size: 40px;
+  transition: transform 1.5s ease-out;
+  transform: translateY(-500px);
 }
 
 /* -----------------------------------------------------------------------------------------------------------------------------
@@ -156,6 +158,7 @@ PAWNS
 .pawn-white {
   color: white;
   top: 90px;
+  transition: transform 2s ease-in-out, color 2s;
 }
 
 .pawn-black {
