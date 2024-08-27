@@ -97,6 +97,9 @@ function App() {
     <>
       <div className="container">
         <div className="canvas">
+          <h1 className="title" style={{ opacity: gameOver ? "0" : "" }}>
+            Tenzi
+          </h1>
           <h3
             className="gameOver-msg "
             style={{
