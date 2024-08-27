@@ -14,8 +14,9 @@ function App() {
   const [btnDisabled, setBntDisabled] = useState(false); // button state (enabled/disabled)
   const [gameOver, setGameOver] = useState(false); // used to to tell if game has ended
 
-  const [msgOpen, setMsgOpen] = useState(false);
+  const [msgOpen, setMsgOpen] = useState(false); // keeps track if message box is being displayed or not
 
+  // audio objects used for sound effect
   const diceSound = new Audio("/sounds/diceRollSound.mp3");
   const cheeringSound = new Audio("/sounds/cheeringSound.mp3");
 
@@ -97,9 +98,12 @@ function App() {
     <>
       <div className="container">
         <div className="canvas">
+          {/* GAME TITLE */}
           <h1 className="title" style={{ opacity: gameOver ? "0" : "" }}>
             Tenzi
           </h1>
+
+          {/* Game over message */}
           <h3
             className="gameOver-msg "
             style={{
@@ -126,6 +130,7 @@ function App() {
             ""
           )}
 
+          {/* Roll/play again button */}
           <div className="btn-container">
             <button
               disabled={btnDisabled}
@@ -138,8 +143,8 @@ function App() {
                   ? () => rollDice(setDicePlr1)
                   : () => rollDice(setDicePlr2)
               }
+              //conditional styling
               style={{
-                //conditional styling
                 opacity: btnDisabled ? "0.7" : "",
                 transform: btnDisabled ? "none" : "",
                 cursor: btnDisabled ? "not-allowed" : "",
@@ -168,6 +173,7 @@ function App() {
             dice={dicePlr2}
             disableDice={turn == 2 ? false : true}
           />
+
           {/* Rendering the two pawns, black and white */}
           <i
             className="fa-solid fa-chess-pawn pawn pawn-white"

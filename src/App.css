@@ -262,3 +262,40 @@ SCORE BOXES
   border: 3px solid black;
   color: black;
 }
+
+/* -----------------------------------------------------------------------------------------------------------------------------
+MEDIA QUERIES
+----------------------------------------------------------------------------------------------------------------------------- */
+
+@media only screen and (max-width: 550px) {
+  .container {
+    scale: 0.8;
+  }
+  .info-msg {
+    right: 10px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .container {
+    scale: 0.75;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .container {
+    scale: 0.7;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .container {
+    scale: 0.65;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .container {
+    scale: 0.6;
+  }
+}
