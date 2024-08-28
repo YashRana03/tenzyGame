@@ -156,12 +156,6 @@ function App() {
             </button>
           </div>
 
-          {/* small pawn in corner to convey whose turn it is */}
-          {/* <i
-            className="fa-solid fa-chess-pawn turn-pawn"
-            style={{ color: turn == 1 ? "white" : "black" }}
-          ></i> */}
-
           {/* rendering the two dice grids */}
           <Player
             setDice={setDicePlr1}
@@ -182,7 +176,6 @@ function App() {
               color: turn != 1 ? "black" : "",
             }}
           ></i>
-          {/* <i className="fa-solid fa-chess-pawn pawn pawn-black"></i> */}
 
           {/* Rendering the score boxes */}
           <div className="score-box score-white">{score[0]}</div>
