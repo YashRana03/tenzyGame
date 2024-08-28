@@ -1,1 +1,1 @@
-This is tenzy the classical dice game! My first game in react.
+This is the Tenzi dice game! My first game in react. You can play with your friends @https://tenzy-dice-yrk.netlify.app/
